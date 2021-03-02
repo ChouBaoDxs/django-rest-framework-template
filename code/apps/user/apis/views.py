@@ -8,7 +8,8 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 from user.apis.serializers import (
     UserMeSerializer,
-    UserProfileSerializer
+    UserProfileDisplaySerializer,
+    UserProfileCreateOrUpdateSerializer
 )
 from utils.mixins import SerializerMixin, PermissionMixin
 from .schemas import UserSchema
@@ -18,10 +19,19 @@ class UserViewSet(SerializerMixin, PermissionMixin, viewsets.GenericViewSet):
     serializer_classes = {
         'default': UserMeSerializer,
         'me': UserMeSerializer,
+        'create_or_update_profile': UserProfileCreateOrUpdateSerializer
     }
+    queryset = User.objects.all()
 
     @UserSchema.me()
     @action(detail=False, methods=['GET'])
     def me(self, request):
-        res_serializer = UserMeSerializer(request.user, context={'request': request})
-        return Response(res_serializer.data)
+        return Response(UserMeSerializer(request.user).data)
+
+    @UserSchema.create_or_update_profile()
+    @action(detail=False, methods=['POST'])
+    def create_or_update_profile(self, request):
+        req_serializer: UserProfileCreateOrUpdateSerializer = self.get_request_serializer()
+        user_profile = req_serializer.save()
+        res_serializer = UserProfileDisplaySerializer(user_profile).data
+        return Response(res_serializer)

@@ -28,7 +28,7 @@ class SerializerMixin:
             return serializer_class
         return super().get_serializer_class()
 
-    def get_request_serializer(self, *args, **kwargs) -> serializers.Serializer:
+    def get_request_serializer(self, *args, **kwargs):
         """
         校验请求数据并返回请求serializer
         """
