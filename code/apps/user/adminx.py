@@ -11,3 +11,4 @@ class UserProfileAdmin(object):
     relfield_style = 'fk-ajax'
     list_filter = ['user', 'created_at', 'updated_at']
     search_fields = ['user__username', 'phone']
+    style_fields = {'user': "fk-ajax"}
