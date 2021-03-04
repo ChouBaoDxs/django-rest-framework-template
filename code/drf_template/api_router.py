@@ -4,6 +4,7 @@ from rest_framework.routers import DefaultRouter, SimpleRouter
 
 from user.apis.views import (
     UserViewSet,
+    UserProfileViewSet,
 )
 
 if settings.DEBUG:
@@ -17,6 +18,7 @@ defalt_router = Router()
 # user app
 user_router = Router()
 user_router.register('', UserViewSet, basename='user')
+user_router.register('user_profile', UserProfileViewSet, basename='user_profile')
 
 app_name = "apis"
 urlpatterns = defalt_router.urls + [

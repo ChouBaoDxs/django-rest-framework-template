@@ -5,7 +5,7 @@ from utils.base_class import GenericModel
 
 
 class UserProfile(GenericModel):
-    user = models.OneToOneField(User, on_delete=models.PROTECT, db_constraint=False, null=True)
+    user = models.OneToOneField(User, on_delete=models.PROTECT, db_constraint=False, null=True, editable=False)
     phone = models.CharField('phone', max_length=32, null=True, unique=True, blank=True)
     desc = models.TextField('desc', default='', blank=True)
 

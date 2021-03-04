@@ -24,3 +24,7 @@ class UserSchema:
             operation_description='创建或修改当前用户个人信息',
             responses={'200': UserProfileDisplaySerializer()},
         )
+
+
+class UserProfileSchema:
+    pass

@@ -24,7 +24,7 @@ class DateTimeRecordModel(models.Model):
 
 
 class LogicDeleteModel(models.Model):
-    is_delete = models.BooleanField('删除标记', default=False)
+    is_delete = models.BooleanField('删除标记', default=False, editable=False)
 
     class Meta:
         abstract = True

@@ -13,6 +13,26 @@ class UserMeSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email']
 
 
+class UserProfileModelSerializer(serializers.ModelSerializer):
+    # 指定两个可修改字段的校验逻辑，不严格校验的话可以省略
+    phone = serializers.CharField(help_text='手机号', validators=[validate_phone])
+    desc = serializers.CharField(help_text='个人介绍', max_length=255)
+
+    class Meta:
+        model = UserProfile
+        # fields = '__all__'
+        exclude = ['is_delete', 'created_at', 'updated_at']
+
+    def save(self, **kwargs):
+        user = self.context['request'].user
+        if self.instance is None:
+            # 说明想新建，校验是否已经存在该用户对应的 profile
+            if UserProfile.objects.filter(user=user).first():
+                raise serializers.ValidationError('不允许重复创建 profile !')
+        kwargs['user'] = user
+        return super().save(**kwargs)
+
+
 class UserProfileDisplaySerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
