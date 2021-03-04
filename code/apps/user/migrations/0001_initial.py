@@ -20,10 +20,10 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(primary_key=True, serialize=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='创建时间')),
                 ('updated_at', models.DateTimeField(auto_now=True, db_index=True, verbose_name='修改时间')),
-                ('is_delete', models.BooleanField(default=False, verbose_name='删除标记')),
+                ('is_delete', models.BooleanField(default=False, editable=False, verbose_name='删除标记')),
                 ('phone', models.CharField(blank=True, max_length=32, null=True, unique=True, verbose_name='phone')),
                 ('desc', models.TextField(blank=True, default='', verbose_name='desc')),
-                ('user', models.OneToOneField(db_constraint=False, null=True, on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
+                ('user', models.OneToOneField(db_constraint=False, editable=False, null=True, on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'UserProfile',
