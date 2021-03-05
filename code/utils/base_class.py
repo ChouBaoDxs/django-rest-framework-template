@@ -29,6 +29,8 @@ class LogicDeleteModel(models.Model):
     class Meta:
         abstract = True
 
+    # 注意，这个 delete 方法只针对单个 model 实例删除有效（比如 first_user.delete()）
+    # 如果是 QuerySet 的删除，还是要使用 queryset.update(is_delete=True) 的写法
     def delete(self, using=None, keep_parents=False):
         self.is_delete = True
         self.save(update_fields=['is_delete'])
@@ -38,7 +40,7 @@ class LogicDeleteModel(models.Model):
             return super().get_queryset().filter(is_delete=False)
 
     objects = NotDeleteManager()
-    all_objects = models.Manager()
+    all_objects = models.Manager()  # 需要查找被逻辑删除的数据时使用这个 all_objects
 
 
 class ReadOnlyModel(BigIntPkModel, CreatedAtModel):
