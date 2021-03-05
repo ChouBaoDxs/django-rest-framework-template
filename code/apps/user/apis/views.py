@@ -35,8 +35,8 @@ class UserViewSet(SerializerMixin, PermissionMixin, viewsets.GenericViewSet):
     def create_or_update_profile(self, request):
         req_serializer: UserProfileCreateOrUpdateSerializer = self.get_request_serializer()
         user_profile = req_serializer.save()
-        res_serializer = UserProfileDisplaySerializer(user_profile).data
-        return Response(res_serializer)
+        res_serializer = UserProfileDisplaySerializer(user_profile)
+        return Response(res_serializer.data)
 
 
 # 无脑 ModelViewSet 的写法
