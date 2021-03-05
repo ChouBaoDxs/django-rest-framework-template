@@ -1,7 +1,30 @@
 # django-rest-framework-template
 久经考验的 django rest framework 项目模板
 
+- [django-rest-framework-template](#django-rest-framework-template)
+  - [开发相关](#开发相关)
+    - [常用基础 Model](#常用基础-model)
+    - [只返回查询结果的 id 集合](#只返回查询结果的-id-集合)
+    - [字符串转 datetime](#字符串转-datetime)
+    - [列表数据转 execl 的 BytesIO](#列表数据转-execl-的-bytesio)
+    - [图片压缩和修改尺寸](#图片压缩和修改尺寸)
+    - [中间件 middleware](#中间件-middleware)
+      - [前后端数据交互时驼峰和下划线参数互转](#前后端数据交互时驼峰和下划线参数互转)
+      - [将 django 的响应改为 code、message、data 的形式](#将-django-的响应改为-codemessagedata-的形式)
+    - [ViewSet 增强，以 Mixin 的形式支持多 Serializer 等功能](#viewset-增强以-mixin-的形式支持多-serializer-等功能)
+      - [支持多 Serializer 的优雅写法](#支持多-serializer-的优雅写法)
+    - [自定义分页器](#自定义分页器)
+    - [获取客户端ip](#获取客户端ip)
+    - [返回 excel 的 Response](#返回-excel-的-response)
+    - [post 方法查询数据](#post-方法查询数据)
+    - [字符串工具方法](#字符串工具方法)
+    - [todo：添加其他用法说明](#todo添加其他用法说明)
+  - [部署相关](#部署相关)
+    - [Dockerfile](#dockerfile)
+    - [entrypoint.sh](#entrypointsh)
+
 [TOC]
+感谢 github TOC 生成器：https://ecotrust-canada.github.io/markdown-toc/
 
 ## 开发相关
 ### 常用基础 Model
