@@ -13,7 +13,6 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.exceptions import ErrorDetail
 
-
 error_logger = logging.getLogger("error")
 
 
@@ -85,13 +84,13 @@ class CodeMessageDataMiddleware(MiddlewareMixin):
 
     def process_exception(self, request, exception):
         if settings.DEBUG:
-            error_logger.error(exception, exc_info=True)
+            error_logger.error(exception, exc_info=True)  # 如果开启 sentry，这一行代码会将错误事件扔给 sentry
             s = repr(exception)
             data = {'code': 500, 'message': s, 'data': s}
             return None
             # return JsonResponse(data)
         else:
-            error_logger.error(exception, exc_info=True)
+            error_logger.error(exception, exc_info=True)  # 如果开启 sentry，这一行代码会将错误事件扔给 sentry
             s = repr(exception)
             data = {'code': 500, 'message': s, 'data': s}
             return JsonResponse(data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

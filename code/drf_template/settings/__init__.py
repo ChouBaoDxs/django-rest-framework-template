@@ -3,3 +3,4 @@ from .cache import *
 from .celery import *
 from .other import *
 from .rest_framework import *
+from .sentry import *

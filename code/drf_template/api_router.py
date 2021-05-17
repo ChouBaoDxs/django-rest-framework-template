@@ -21,6 +21,13 @@ user_router.register('', UserViewSet, basename='user')
 user_router.register('user_profile', UserProfileViewSet, basename='user_profile')
 
 app_name = "apis"
-urlpatterns = defalt_router.urls + [
+urlpatterns: list = defalt_router.urls + [
     path(r"user/", include(user_router.urls)),
 ]
+
+if settings.DEBUG:
+    def trigger_error(request):
+        division_by_zero = 1 / 0
+
+
+    urlpatterns.append(path('sentry-debug/', trigger_error))
