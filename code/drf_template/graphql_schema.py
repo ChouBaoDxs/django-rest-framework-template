@@ -44,7 +44,7 @@ class Query(ingredients.schema.Query, graphene.ObjectType):
         # We can easily optimize query count in the resolve method
         return Ingredient.objects.select_related("category").all()
 
-    def resolve_category_by_name_v1(root, info, name):
+    def resolve_category_by_name_v1(root, info, name: str):
         """
         query {
           categoryByNameV1(name: "Dairy") {

@@ -8,6 +8,7 @@ from django.http.response import JsonResponse
 from django.utils.deprecation import MiddlewareMixin
 from djangorestframework_camel_case.settings import api_settings
 from djangorestframework_camel_case.util import underscoreize
+from graphql.execution.base import ResolveInfo
 from rest_framework import status
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -94,3 +95,11 @@ class CodeMessageDataMiddleware(MiddlewareMixin):
             s = repr(exception)
             data = {'code': 500, 'message': s, 'data': s}
             return JsonResponse(data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class GraphqlAuthorizationMiddleware(object):
+    def resolve(self, next, root, info: ResolveInfo, **args):
+        request: HttpRequest = info.context
+        if info.field_name == 'return_null':
+            return None  # 直接返回 null 响应
+        return next(root, info, **args)

@@ -56,5 +56,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 # graphql
 GRAPHENE = {
-    'SCHEMA': 'drf_template.graphql_schema.schema'
+    'SCHEMA': 'drf_template.graphql_schema.schema',
+    'MIDDLEWARE': ['utils.middlewares.GraphqlAuthorizationMiddleware']
 }

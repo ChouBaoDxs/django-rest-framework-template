@@ -1,6 +1,7 @@
 from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
+from graphql.execution.base import ResolveInfo
 
 from ingredients.models import Category, Ingredient
 
@@ -12,6 +13,10 @@ class CategoryNode(DjangoObjectType):
         model = Category
         filter_fields = ['name', 'ingredients']
         interfaces = (relay.Node,)
+
+    @classmethod
+    def get_queryset(cls, queryset, info: ResolveInfo):
+        return queryset
 
 
 class IngredientNode(DjangoObjectType):
@@ -25,6 +30,10 @@ class IngredientNode(DjangoObjectType):
             'category__name': ['exact'],
         }
         interfaces = (relay.Node,)
+
+    @classmethod
+    def get_queryset(cls, queryset, info: ResolveInfo):
+        return queryset
 
 
 class Query(ObjectType):
@@ -46,7 +55,7 @@ class Query(ObjectType):
     ingredient = relay.Node.Field(IngredientNode)
     """
     query {
-      ingredient(id: "SW5ncmVkaWVudE5vZGU6MQ==") {
+      ingredient(id: "SW5ncmVkaWVudE5vZGU6MQ==") { # base64 解码之后：IngredientNode:1
         name
       }
     }
