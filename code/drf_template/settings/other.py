@@ -48,7 +48,13 @@ DATABASE_APPS_MAPPING = {
     'xadmin': 'default',
 
     'user': 'default',
+    'ingredients': 'default',
 }
 
 # cors
 CORS_ORIGIN_ALLOW_ALL = True
+
+# graphql
+GRAPHENE = {
+    'SCHEMA': 'drf_template.graphql_schema.schema'
+}
