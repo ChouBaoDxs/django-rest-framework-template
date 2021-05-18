@@ -11,7 +11,7 @@ class CategoryNode(DjangoObjectType):
     class Meta:
         model = Category
         filter_fields = ['name', 'ingredients']
-        interfaces = (relay.Node, )
+        interfaces = (relay.Node,)
 
 
 class IngredientNode(DjangoObjectType):
@@ -24,7 +24,7 @@ class IngredientNode(DjangoObjectType):
             'category': ['exact'],
             'category__name': ['exact'],
         }
-        interfaces = (relay.Node, )
+        interfaces = (relay.Node,)
 
 
 class Query(ObjectType):

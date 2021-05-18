@@ -17,11 +17,19 @@ class IngredientType(DjangoObjectType):
     class Meta:
         model = Ingredient
         fields = ("id", "name", "notes", "category")
+        description = '成分的 Type'
 
 
 class Query(ingredients.schema.Query, graphene.ObjectType):
     all_ingredients_v1 = graphene.List(IngredientType)
-    category_by_name_v1 = graphene.Field(CategoryType, name=graphene.String(required=True))
+    category_by_name_v1 = graphene.Field(CategoryType,
+                                         name=graphene.String(
+                                             # name='newName', # 改名
+                                             required=True,
+                                             description='类别名称',
+                                             default_value='',
+                                         ),
+                                         description='按照类别名称获取单个类别')
 
     def resolve_all_ingredients_v1(root, info: ResolveInfo):
         """
