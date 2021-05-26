@@ -30,7 +30,7 @@ urlpatterns = [
     path("api/", include("drf_template.api_router")),
 
     # graphql
-    path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True))),
     # path("graphql", GraphQLView.as_view(graphiql=True)),
     # path("graphql", GraphQLView.as_view(graphiql=True, schema=schema)), # 如果不在 settings 里配置 GRAPHENE，可以把 schema 写这里
 ]

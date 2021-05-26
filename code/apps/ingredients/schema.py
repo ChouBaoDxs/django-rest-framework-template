@@ -1,9 +1,12 @@
+import graphene
 from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
+from graphql.language.ast import BooleanValue, StringValue, IntValue, ListValue, ObjectValue, FloatValue
 from graphql.execution.base import ResolveInfo
 
 from ingredients.models import Category, Ingredient
+from utils.graphql import JsonField, OnlyOutputJsonField
 
 
 # Graphene will automatically map the Category model's fields onto the CategoryNode.
@@ -84,3 +87,17 @@ class Query(ObjectType):
       }
     }
     """
+    # 自定义
+    extra_string_field = graphene.String()
+    # extra_json_field = graphene.JSONString()
+    # extra_json_field = graphene.Field(graphene.JSONString) # 会 dump
+    # extra_json_field = JsonField()
+    extra_json_field = OnlyOutputJsonField()
+
+    def resolve_extra_string_field(self, info):
+        return 'extra_string_field'
+
+    def resolve_extra_json_field(self, info):
+        return {
+            'msg': 'extra_json_field'
+        }
