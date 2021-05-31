@@ -1,5 +1,7 @@
 import graphene
+from graphene_django.utils import camelize
 from graphql.language.ast import BooleanValue, StringValue, IntValue, ListValue, ObjectValue, FloatValue
+from rest_framework.utils import encoders, json
 
 
 class JsonField(graphene.Scalar):
@@ -35,7 +37,21 @@ class JsonField(graphene.Scalar):
             return None
 
 
-class OnlyOutputJsonField(graphene.JSONString):
+class OutputJsonField(graphene.JSONString):
     @staticmethod
     def serialize(dt):
         return dt
+
+
+class OutputCamelizeJsonField(graphene.JSONString):
+    @staticmethod
+    def serialize(dt):
+        return camelize(dt)
+
+
+class OutputDrfCamelizeJsonField(graphene.JSONString):
+    @staticmethod
+    def serialize(dt):
+        dt = camelize(dt)
+        json_dump = json.dumps(dt, cls=encoders.JSONEncoder)
+        return json.loads(json_dump)

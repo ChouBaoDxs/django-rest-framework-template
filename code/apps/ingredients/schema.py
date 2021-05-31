@@ -6,7 +6,7 @@ from graphql.language.ast import BooleanValue, StringValue, IntValue, ListValue,
 from graphql.execution.base import ResolveInfo
 
 from ingredients.models import Category, Ingredient
-from utils.graphql import JsonField, OnlyOutputJsonField
+from utils.graphql import OutputJsonField
 
 
 # Graphene will automatically map the Category model's fields onto the CategoryNode.
@@ -20,6 +20,12 @@ class CategoryNode(DjangoObjectType):
     @classmethod
     def get_queryset(cls, queryset, info: ResolveInfo):
         return queryset
+
+    mask_name = graphene.String(description='自定义字段 mask_name')
+
+    @classmethod
+    def resolve_mask_name(cls, category: Category, info: ResolveInfo):
+        return category.name
 
 
 class IngredientNode(DjangoObjectType):
@@ -44,7 +50,7 @@ class Query(ObjectType):
     all_categories = DjangoFilterConnectionField(CategoryNode)
     """
     query {
-      allIngredients {
+      allCategories {
         edges {
           node {
             id,
@@ -92,7 +98,7 @@ class Query(ObjectType):
     # extra_json_field = graphene.JSONString()
     # extra_json_field = graphene.Field(graphene.JSONString) # 会 dump
     # extra_json_field = JsonField()
-    extra_json_field = OnlyOutputJsonField()
+    extra_json_field = OutputJsonField()
 
     def resolve_extra_string_field(self, info):
         return 'extra_string_field'
