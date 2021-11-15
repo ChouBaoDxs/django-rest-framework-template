@@ -31,24 +31,36 @@
 - 代码位置：`code/utils/base_class.py`
 - 比如附带逻辑删除以及创建时间、修改时间的 model：
 ```py
+class LogicDeleteQuerySet(models.QuerySet):
+    # queryset 的逻辑删除方法
+    def delete(self):
+        return self.update(is_deleted=True, deleted_at=timezone.now())
+
+
+class LogicDeleteManager(models.manager.BaseManager.from_queryset(LogicDeleteQuerySet)):
+    pass
+
+
 class LogicDeleteModel(models.Model):
     is_delete = models.BooleanField('删除标记', default=False, editable=False)
+    deleted_at = models.DateTimeField('删除时间', null=True)
 
     class Meta:
         abstract = True
 
-    # 注意，这个 delete 方法只针对单个 model 实例删除有效（比如 first_user.delete()）
-    # 如果是 QuerySet 的删除，还是要使用 queryset.update(is_delete=True) 的写法
+    # 单个实例的逻辑删除方法
     def delete(self, using=None, keep_parents=False):
         self.is_delete = True
-        self.save(update_fields=['is_delete'])
+        self.deleted_at = timezone.now()
+        self.save(update_fields=['is_delete', 'deleted_at'])
 
-    class NotDeleteManager(models.Manager):
+    # class NotDeleteManager(models.Manager):
+    class NotDeleteManager(LogicDeleteManager):
         def get_queryset(self):
             return super().get_queryset().filter(is_delete=False)
 
     objects = NotDeleteManager()
-    all_objects = models.Manager() # 需要查找被逻辑删除的数据时使用这个 all_objects
+    all_objects = models.Manager()  # 需要查找被逻辑删除的数据时使用这个 all_objects
 ```
 ### 只返回查询结果的 id 集合
 - 代码位置：`code/utils/database.py`
@@ -161,7 +173,7 @@ class UserViewSet(SerializerMixin, PermissionMixin, viewsets.GenericViewSet):
         'create_or_update_profile': UserProfileCreateOrUpdateSerializer
     }
 
-        @action(detail=False, methods=['POST'])
+    @action(detail=False, methods=['POST'])
     def create_or_update_profile(self, request):
         req_serializer: UserProfileCreateOrUpdateSerializer = self.get_request_serializer()
         user_profile = req_serializer.save()
