@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'xadmin',
 
-    'user'
+    'user',
+    'goods',
 ]
 
 MIDDLEWARE = [

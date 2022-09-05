@@ -2,6 +2,7 @@ from django.conf import settings
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter, SimpleRouter
 
+from goods.views import GoodsViewSet
 from user.apis.views import (
     UserViewSet,
     UserProfileViewSet,
@@ -20,9 +21,14 @@ user_router = Router()
 user_router.register('', UserViewSet, basename='user')
 user_router.register('user_profile', UserProfileViewSet, basename='user_profile')
 
-app_name = "apis"
+# goods app
+goods_router = Router()
+goods_router.register('', GoodsViewSet, basename='goods')
+
+app_name = 'apis'
 urlpatterns: list = defalt_router.urls + [
-    path(r"user/", include(user_router.urls)),
+    path(r'user/', include(user_router.urls)),
+    path(r'goods/', include(goods_router.urls)),
 ]
 
 if settings.DEBUG:

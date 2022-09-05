@@ -48,6 +48,7 @@ DATABASE_APPS_MAPPING = {
     'xadmin': 'default',
 
     'user': 'default',
+    'goods': 'default',
 }
 
 # cors

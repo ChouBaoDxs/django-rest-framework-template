@@ -21,7 +21,7 @@ class UserProfileModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         # fields = '__all__'
-        exclude = ['is_delete', 'created_at', 'updated_at']
+        exclude = ['created_at', 'updated_at']
 
     def save(self, **kwargs):
         user = self.context['request'].user
