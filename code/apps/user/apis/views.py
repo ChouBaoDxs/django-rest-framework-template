@@ -13,7 +13,7 @@ from user.apis.serializers import (
     UserProfileCreateOrUpdateSerializer
 )
 from user.models import UserProfile
-from utils.mixins import SerializerMixin, PermissionMixin
+from contrib.drf.viewset import SerializerMixin, PermissionMixin
 from .schemas import UserSchema, UserProfileSchema
 
 
