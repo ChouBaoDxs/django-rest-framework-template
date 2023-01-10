@@ -48,7 +48,13 @@ DATABASE_APPS_MAPPING = {
     'xadmin': 'default',
 
     'user': 'default',
+    'django_socio_grpc_quickstart': 'default',
 }
 
 # cors
 CORS_ORIGIN_ALLOW_ALL = True
+
+GRPC_FRAMEWORK = {
+    'ROOT_HANDLERS_HOOK': 'django_socio_grpc_quickstart.apis.handlers.grpc_handlers',
+    'GRPC_CHANNEL_PORT': 50051,
+}

@@ -48,11 +48,13 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_extensions',
     'django_filters',
+    'django_socio_grpc',
     'drf_yasg',
     'rest_framework',
     'xadmin',
 
-    'user'
+    'user',
+    'django_socio_grpc_quickstart',
 ]
 
 MIDDLEWARE = [

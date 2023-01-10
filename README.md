@@ -18,6 +18,7 @@
     - [返回 excel 的 Response](#返回-excel-的-response)
     - [post 方法查询数据](#post-方法查询数据)
     - [字符串工具方法](#字符串工具方法)
+    - [开发 grpc 服务](#开发-grpc-服务)
     - [todo：添加其他用法说明](#todo添加其他用法说明)
   - [部署相关](#部署相关)
     - [Dockerfile](#dockerfile)
@@ -206,6 +207,10 @@ class UserViewSet(SerializerMixin, PermissionMixin, viewsets.GenericViewSet):
 - 代码位置：`code/utils/strings.py`
 - 字符串、float 类型转 Decimal：`str2decimal`
 - 下划线转驼峰：`underline_2_hump`
+
+### 开发 grpc 服务
+- 代码位置：`code/apps/django_socio_grpc_quickstart`
+- 第三方库：[django-socio-grpc](https://github.com/socotecio/django-socio-grpc)
 
 ### todo：添加其他用法说明
 

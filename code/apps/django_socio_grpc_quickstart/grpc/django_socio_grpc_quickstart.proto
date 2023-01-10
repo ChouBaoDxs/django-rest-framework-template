@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package drf_template.django_socio_grpc_quickstart;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/struct.proto";
+
+service QuestionController {
+    rpc Create(QuestionRequest) returns (QuestionResponse) {}
+    rpc CustomRetrieve(QuestionCustomRetrieveRequest) returns (QuestionCustomRetrieveResponse) {}
+    rpc CustomRetrieveWithBaseProtoSerializer(QuestionCustomRetrieveWithBaseProtoSerializerRequest) returns (QuestionBaseProtoExampleResponse) {}
+    rpc Destroy(QuestionDestroyRequest) returns (google.protobuf.Empty) {}
+    rpc List(QuestionListRequest) returns (QuestionListResponse) {}
+    rpc MethodSerializerFieldExample(google.protobuf.Empty) returns (MethodSerializerFieldExampleResponse) {}
+    rpc PartialUpdate(QuestionPartialUpdateRequest) returns (QuestionResponse) {}
+    rpc Retrieve(QuestionRetrieveRequest) returns (QuestionResponse) {}
+    rpc Update(QuestionRequest) returns (QuestionResponse) {}
+}
+
+message MethodSerializerFieldExampleResponse {
+    int32 default_method_field = 1;
+    repeated google.protobuf.Struct custom_method_field = 2;
+}
+
+message QuestionBaseProtoExampleResponse {
+    int32 id = 1;
+    string question_text = 2;
+    string pub_date = 3;
+}
+
+message QuestionCustomRetrieveRequest {
+    int32 id = 1;
+}
+
+message QuestionCustomRetrieveResponse {
+    int32 id = 1;
+    string question_text = 2;
+    string pub_date = 3;
+    google.protobuf.Struct dict_data = 4;
+}
+
+message QuestionCustomRetrieveWithBaseProtoSerializerRequest {
+    int32 id = 1;
+}
+
+message QuestionDestroyRequest {
+    int32 id = 1;
+}
+
+message QuestionListRequest {
+}
+
+message QuestionListResponse {
+    repeated QuestionResponse results = 1;
+}
+
+message QuestionPartialUpdateRequest {
+    int32 id = 1;
+    string question_text = 2;
+    string pub_date = 3;
+    repeated string _partial_update_fields = 4;
+}
+
+message QuestionRequest {
+    int32 id = 1;
+    string question_text = 2;
+    string pub_date = 3;
+}
+
+message QuestionResponse {
+    int32 id = 1;
+    string question_text = 2;
+    string pub_date = 3;
+}
+
+message QuestionRetrieveRequest {
+    int32 id = 1;
+}
+
