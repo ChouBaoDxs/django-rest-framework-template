@@ -48,10 +48,10 @@ class QuestionServiceCaller:
 if __name__ == '__main__':
     # rsp = QuestionServiceCaller.Create()
     # rsp = QuestionServiceCaller.Retrieve()
-    # rsp = QuestionServiceCaller.List()
+    rsp = QuestionServiceCaller.List()
     # rsp = QuestionServiceCaller.CustomRetrieve()
     # rsp = QuestionServiceCaller.CustomRetrieveWithBaseProtoSerializer()
-    rsp = QuestionServiceCaller.MethodSerializerFieldExample()
+    # rsp = QuestionServiceCaller.MethodSerializerFieldExample()
     dict_result = MessageToDict(
         rsp,
         preserving_proto_field_name=True,

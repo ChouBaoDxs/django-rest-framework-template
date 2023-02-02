@@ -15,7 +15,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from google.protobuf import struct_pb2 as google_dot_protobuf_dot_struct__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\nIapps/django_socio_grpc_quickstart/grpc/django_socio_grpc_quickstart.proto\x12)drf_template.django_socio_grpc_quickstart\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/protobuf/struct.proto\"z\n$MethodSerializerFieldExampleResponse\x12\x1c\n\x14\x64\x65\x66\x61ult_method_field\x18\x01 \x01(\x05\x12\x34\n\x13\x63ustom_method_field\x18\x02 \x03(\x0b\x32\x17.google.protobuf.Struct\"W\n QuestionBaseProtoExampleResponse\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x15\n\rquestion_text\x18\x02 \x01(\t\x12\x10\n\x08pub_date\x18\x03 \x01(\t\"+\n\x1dQuestionCustomRetrieveRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"\x81\x01\n\x1eQuestionCustomRetrieveResponse\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x15\n\rquestion_text\x18\x02 \x01(\t\x12\x10\n\x08pub_date\x18\x03 \x01(\t\x12*\n\tdict_data\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct\"B\n4QuestionCustomRetrieveWithBaseProtoSerializerRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"$\n\x16QuestionDestroyRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"\x15\n\x13QuestionListRequest\"d\n\x14QuestionListResponse\x12L\n\x07results\x18\x01 \x03(\x0b\x32;.drf_template.django_socio_grpc_quickstart.QuestionResponse\"s\n\x1cQuestionPartialUpdateRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x15\n\rquestion_text\x18\x02 \x01(\t\x12\x10\n\x08pub_date\x18\x03 \x01(\t\x12\x1e\n\x16_partial_update_fields\x18\x04 \x03(\t\"F\n\x0fQuestionRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x15\n\rquestion_text\x18\x02 \x01(\t\x12\x10\n\x08pub_date\x18\x03 \x01(\t\"G\n\x10QuestionResponse\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x15\n\rquestion_text\x18\x02 \x01(\t\x12\x10\n\x08pub_date\x18\x03 \x01(\t\"%\n\x17QuestionRetrieveRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x32\xce\n\n\x12QuestionController\x12\x83\x01\n\x06\x43reate\x12:.drf_template.django_socio_grpc_quickstart.QuestionRequest\x1a;.drf_template.django_socio_grpc_quickstart.QuestionResponse\"\x00\x12\xa7\x01\n\x0e\x43ustomRetrieve\x12H.drf_template.django_socio_grpc_quickstart.QuestionCustomRetrieveRequest\x1aI.drf_template.django_socio_grpc_quickstart.QuestionCustomRetrieveResponse\"\x00\x12\xd7\x01\n%CustomRetrieveWithBaseProtoSerializer\x12_.drf_template.django_socio_grpc_quickstart.QuestionCustomRetrieveWithBaseProtoSerializerRequest\x1aK.drf_template.django_socio_grpc_quickstart.QuestionBaseProtoExampleResponse\"\x00\x12\x66\n\x07\x44\x65stroy\x12\x41.drf_template.django_socio_grpc_quickstart.QuestionDestroyRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x89\x01\n\x04List\x12>.drf_template.django_socio_grpc_quickstart.QuestionListRequest\x1a?.drf_template.django_socio_grpc_quickstart.QuestionListResponse\"\x00\x12\x89\x01\n\x1cMethodSerializerFieldExample\x12\x16.google.protobuf.Empty\x1aO.drf_template.django_socio_grpc_quickstart.MethodSerializerFieldExampleResponse\"\x00\x12\x97\x01\n\rPartialUpdate\x12G.drf_template.django_socio_grpc_quickstart.QuestionPartialUpdateRequest\x1a;.drf_template.django_socio_grpc_quickstart.QuestionResponse\"\x00\x12\x8d\x01\n\x08Retrieve\x12\x42.drf_template.django_socio_grpc_quickstart.QuestionRetrieveRequest\x1a;.drf_template.django_socio_grpc_quickstart.QuestionResponse\"\x00\x12\x83\x01\n\x06Update\x12:.drf_template.django_socio_grpc_quickstart.QuestionRequest\x1a;.drf_template.django_socio_grpc_quickstart.QuestionResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\nIapps/django_socio_grpc_quickstart/grpc/django_socio_grpc_quickstart.proto\x12)drf_template.django_socio_grpc_quickstart\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/protobuf/struct.proto\"z\n$MethodSerializerFieldExampleResponse\x12\x1c\n\x14\x64\x65\x66\x61ult_method_field\x18\x01 \x01(\x05\x12\x34\n\x13\x63ustom_method_field\x18\x02 \x03(\x0b\x32\x17.google.protobuf.Struct\"W\n QuestionBaseProtoExampleResponse\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x15\n\rquestion_text\x18\x02 \x01(\t\x12\x10\n\x08pub_date\x18\x03 \x01(\t\"+\n\x1dQuestionCustomRetrieveRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"\x95\x01\n\x1eQuestionCustomRetrieveResponse\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x15\n\rquestion_text\x18\x02 \x01(\t\x12\x10\n\x08pub_date\x18\x03 \x01(\t\x12*\n\tdict_data\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x12\n\nlike_count\x18\x05 \x01(\x05\"B\n4QuestionCustomRetrieveWithBaseProtoSerializerRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"$\n\x16QuestionDestroyRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"\x15\n\x13QuestionListRequest\"d\n\x14QuestionListResponse\x12L\n\x07results\x18\x01 \x03(\x0b\x32;.drf_template.django_socio_grpc_quickstart.QuestionResponse\"\x87\x01\n\x1cQuestionPartialUpdateRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x15\n\rquestion_text\x18\x02 \x01(\t\x12\x10\n\x08pub_date\x18\x03 \x01(\t\x12\x1e\n\x16_partial_update_fields\x18\x04 \x03(\t\x12\x12\n\nlike_count\x18\x05 \x01(\x05\"Z\n\x0fQuestionRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x15\n\rquestion_text\x18\x02 \x01(\t\x12\x10\n\x08pub_date\x18\x03 \x01(\t\x12\x12\n\nlike_count\x18\x04 \x01(\x05\"[\n\x10QuestionResponse\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x15\n\rquestion_text\x18\x02 \x01(\t\x12\x10\n\x08pub_date\x18\x03 \x01(\t\x12\x12\n\nlike_count\x18\x04 \x01(\x05\"%\n\x17QuestionRetrieveRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x32\xce\n\n\x12QuestionController\x12\x83\x01\n\x06\x43reate\x12:.drf_template.django_socio_grpc_quickstart.QuestionRequest\x1a;.drf_template.django_socio_grpc_quickstart.QuestionResponse\"\x00\x12\xa7\x01\n\x0e\x43ustomRetrieve\x12H.drf_template.django_socio_grpc_quickstart.QuestionCustomRetrieveRequest\x1aI.drf_template.django_socio_grpc_quickstart.QuestionCustomRetrieveResponse\"\x00\x12\xd7\x01\n%CustomRetrieveWithBaseProtoSerializer\x12_.drf_template.django_socio_grpc_quickstart.QuestionCustomRetrieveWithBaseProtoSerializerRequest\x1aK.drf_template.django_socio_grpc_quickstart.QuestionBaseProtoExampleResponse\"\x00\x12\x66\n\x07\x44\x65stroy\x12\x41.drf_template.django_socio_grpc_quickstart.QuestionDestroyRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x89\x01\n\x04List\x12>.drf_template.django_socio_grpc_quickstart.QuestionListRequest\x1a?.drf_template.django_socio_grpc_quickstart.QuestionListResponse\"\x00\x12\x89\x01\n\x1cMethodSerializerFieldExample\x12\x16.google.protobuf.Empty\x1aO.drf_template.django_socio_grpc_quickstart.MethodSerializerFieldExampleResponse\"\x00\x12\x97\x01\n\rPartialUpdate\x12G.drf_template.django_socio_grpc_quickstart.QuestionPartialUpdateRequest\x1a;.drf_template.django_socio_grpc_quickstart.QuestionResponse\"\x00\x12\x8d\x01\n\x08Retrieve\x12\x42.drf_template.django_socio_grpc_quickstart.QuestionRetrieveRequest\x1a;.drf_template.django_socio_grpc_quickstart.QuestionResponse\"\x00\x12\x83\x01\n\x06Update\x12:.drf_template.django_socio_grpc_quickstart.QuestionRequest\x1a;.drf_template.django_socio_grpc_quickstart.QuestionResponse\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'apps.django_socio_grpc_quickstart.grpc.django_socio_grpc_quickstart_pb2', globals())
@@ -29,23 +29,23 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _QUESTIONCUSTOMRETRIEVEREQUEST._serialized_start=392
   _QUESTIONCUSTOMRETRIEVEREQUEST._serialized_end=435
   _QUESTIONCUSTOMRETRIEVERESPONSE._serialized_start=438
-  _QUESTIONCUSTOMRETRIEVERESPONSE._serialized_end=567
-  _QUESTIONCUSTOMRETRIEVEWITHBASEPROTOSERIALIZERREQUEST._serialized_start=569
-  _QUESTIONCUSTOMRETRIEVEWITHBASEPROTOSERIALIZERREQUEST._serialized_end=635
-  _QUESTIONDESTROYREQUEST._serialized_start=637
-  _QUESTIONDESTROYREQUEST._serialized_end=673
-  _QUESTIONLISTREQUEST._serialized_start=675
-  _QUESTIONLISTREQUEST._serialized_end=696
-  _QUESTIONLISTRESPONSE._serialized_start=698
-  _QUESTIONLISTRESPONSE._serialized_end=798
-  _QUESTIONPARTIALUPDATEREQUEST._serialized_start=800
-  _QUESTIONPARTIALUPDATEREQUEST._serialized_end=915
-  _QUESTIONREQUEST._serialized_start=917
-  _QUESTIONREQUEST._serialized_end=987
-  _QUESTIONRESPONSE._serialized_start=989
-  _QUESTIONRESPONSE._serialized_end=1060
-  _QUESTIONRETRIEVEREQUEST._serialized_start=1062
-  _QUESTIONRETRIEVEREQUEST._serialized_end=1099
-  _QUESTIONCONTROLLER._serialized_start=1102
-  _QUESTIONCONTROLLER._serialized_end=2460
+  _QUESTIONCUSTOMRETRIEVERESPONSE._serialized_end=587
+  _QUESTIONCUSTOMRETRIEVEWITHBASEPROTOSERIALIZERREQUEST._serialized_start=589
+  _QUESTIONCUSTOMRETRIEVEWITHBASEPROTOSERIALIZERREQUEST._serialized_end=655
+  _QUESTIONDESTROYREQUEST._serialized_start=657
+  _QUESTIONDESTROYREQUEST._serialized_end=693
+  _QUESTIONLISTREQUEST._serialized_start=695
+  _QUESTIONLISTREQUEST._serialized_end=716
+  _QUESTIONLISTRESPONSE._serialized_start=718
+  _QUESTIONLISTRESPONSE._serialized_end=818
+  _QUESTIONPARTIALUPDATEREQUEST._serialized_start=821
+  _QUESTIONPARTIALUPDATEREQUEST._serialized_end=956
+  _QUESTIONREQUEST._serialized_start=958
+  _QUESTIONREQUEST._serialized_end=1048
+  _QUESTIONRESPONSE._serialized_start=1050
+  _QUESTIONRESPONSE._serialized_end=1141
+  _QUESTIONRETRIEVEREQUEST._serialized_start=1143
+  _QUESTIONRETRIEVEREQUEST._serialized_end=1180
+  _QUESTIONCONTROLLER._serialized_start=1183
+  _QUESTIONCONTROLLER._serialized_end=2541
 # @@protoc_insertion_point(module_scope)

@@ -37,6 +37,7 @@ message QuestionCustomRetrieveResponse {
     string question_text = 2;
     string pub_date = 3;
     google.protobuf.Struct dict_data = 4;
+    int32 like_count = 5;
 }
 
 message QuestionCustomRetrieveWithBaseProtoSerializerRequest {
@@ -59,18 +60,21 @@ message QuestionPartialUpdateRequest {
     string question_text = 2;
     string pub_date = 3;
     repeated string _partial_update_fields = 4;
+    int32 like_count = 5;
 }
 
 message QuestionRequest {
     int32 id = 1;
     string question_text = 2;
     string pub_date = 3;
+    int32 like_count = 4;
 }
 
 message QuestionResponse {
     int32 id = 1;
     string question_text = 2;
     string pub_date = 3;
+    int32 like_count = 4;
 }
 
 message QuestionRetrieveRequest {

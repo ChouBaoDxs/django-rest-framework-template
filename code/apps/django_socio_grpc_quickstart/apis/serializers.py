@@ -23,7 +23,7 @@ class QuestionProtoSerializer(proto_serializers.ModelProtoSerializer):
         proto_class = quickstart_pb2.QuestionResponse
         proto_class_list = quickstart_pb2.QuestionListResponse
         # message_list_attr = 'list_custom_field_name' # 列表接口的结果字段默认是 results，可以自定义
-        fields = ['id', 'question_text', 'pub_date']
+        fields = ['id', 'question_text', 'pub_date', 'like_count']
 
 
 class QuestionCustomRetrieveProtoSerializer(proto_serializers.ModelProtoSerializer):
@@ -33,7 +33,7 @@ class QuestionCustomRetrieveProtoSerializer(proto_serializers.ModelProtoSerializ
     class Meta:
         model = Question
         proto_class = quickstart_pb2.QuestionCustomRetrieveResponse
-        fields = ['id', 'question_text', 'pub_date', 'dict_data']
+        fields = ['id', 'question_text', 'pub_date', 'like_count', 'dict_data']
 
     def to_representation(self, instance: Question):
         ret = super().to_representation(instance)
