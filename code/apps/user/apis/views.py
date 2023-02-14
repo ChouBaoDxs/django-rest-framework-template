@@ -25,6 +25,17 @@ class UserViewSet(SerializerMixin, PermissionMixin, viewsets.GenericViewSet):
     }
     queryset = User.objects.all()
 
+    @UserSchema.fake_error()
+    @action(detail=False, methods=['GET'], permission_classes=[], authentication_classes=[], pagination_class=None, filter_backends=[])
+    def fake_error(self, request):
+        a = 1 / 0
+        return Response()
+
+    @UserSchema.fake_success()
+    @action(detail=False, methods=['GET'], permission_classes=[], authentication_classes=[], pagination_class=None, filter_backends=[])
+    def fake_success(self, request):
+        return Response({'msg': 'ok'})
+
     @UserSchema.me()
     @action(detail=False, methods=['GET'])
     def me(self, request):
