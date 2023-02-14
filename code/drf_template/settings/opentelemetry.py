@@ -45,7 +45,10 @@ if OTEL_PYTHON_DJANGO_INSTRUMENT:
 
     # https://opentelemetry-python-contrib.readthedocs.io/en/latest/instrumentation/django/django.html
     def request_hook(span, request):
-        pass
+        # https://github.com/open-telemetry/opentelemetry-python-contrib/issues/288
+        activation_key = "opentelemetry-instrumentor-django.activation_key"
+        if activation_key in request.META:
+            request.META[activation_key].__name__ = ""
 
 
     def response_hook(span, request, response):
