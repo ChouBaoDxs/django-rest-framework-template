@@ -14,6 +14,18 @@ class UserSchema(BaseSchema):
     TAGS = ['用户/用户']
 
     @classmethod
+    def fake_error(cls):
+        return cls.schema(
+            operation_id='user-模拟错误响应',
+        )
+
+    @classmethod
+    def fake_success(cls):
+        return cls.schema(
+            operation_id='user-模拟成功响应',
+        )
+
+    @classmethod
     def me(cls):
         return cls.schema(
             operation_id='user-获取当前用户信息',
