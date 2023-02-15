@@ -7,6 +7,7 @@ from opentelemetry import trace
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from opentelemetry.instrumentation.requests import RequestsInstrumentor
 from opentelemetry.instrumentation.aiohttp_client import AioHttpClientInstrumentor
+from opentelemetry.sdk.trace import TracerProvider, Span
 
 from utils import init_jaeger_tracer
 
@@ -68,9 +69,41 @@ async def fake_error():
     return a
 
 
+def server_request_hook(span: Span, scope: dict):
+    if span and span.is_recording():
+        span.set_attribute('custom_user_attribute_from_request_hook', 'some-value')
+
+
+def client_request_hook(span: Span, scope: dict):
+    if span and span.is_recording():
+        span.set_attribute('custom_user_attribute_from_client_request_hook', 'some-value')
+
+
+def client_response_hook(span: Span, message: dict):
+    if span and span.is_recording():
+        span.set_attribute('custom_user_attribute_from_response_hook', 'some-value')
+
+
+@app.middleware('http')
+async def add_trace_id_header(request: fastapi.Request, call_next):
+    # trace_id = trace.get_current_span().get_span_context().trace_id
+    span: Span = trace.get_current_span()
+    trace_id = span.context.trace_id
+    # trace_id = span.get_span_context().trace_id
+    response = await call_next(request)
+    response.headers['trace-id'] = trace.format_trace_id(trace_id)
+    return response
+
+
 RequestsInstrumentor().instrument()
 AioHttpClientInstrumentor().instrument()
-FastAPIInstrumentor.instrument_app(app, excluded_urls='/docs,/openapi.json')
+FastAPIInstrumentor.instrument_app(
+    app,
+    excluded_urls='/docs,/openapi.json',
+    server_request_hook=server_request_hook,
+    client_request_hook=client_request_hook,
+    client_response_hook=client_response_hook,
+)
 
 if __name__ == '__main__':
     init_jaeger_tracer('fastapi-server-1')
