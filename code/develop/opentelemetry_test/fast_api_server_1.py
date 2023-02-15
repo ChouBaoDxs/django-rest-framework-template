@@ -60,6 +60,14 @@ async def django_server():
         return await resp.json()
 
 
+@app.get('/fake_error')
+async def fake_error():
+    x = 1
+    y = 0
+    a = x / y
+    return a
+
+
 RequestsInstrumentor().instrument()
 AioHttpClientInstrumentor().instrument()
 FastAPIInstrumentor.instrument_app(app, excluded_urls='/docs,/openapi.json')
