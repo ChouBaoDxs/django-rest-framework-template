@@ -1,23 +1,32 @@
 import os
+import typing
 
+from django.http.response import HttpResponse
+from rest_framework.response import Response
 from opentelemetry import trace
-from opentelemetry.instrumentation.django import DjangoInstrumentor
 from opentelemetry.exporter.jaeger.thrift import JaegerExporter
 from opentelemetry.sdk.resources import SERVICE_NAME, Resource
-from opentelemetry.sdk.trace import TracerProvider
-
+from opentelemetry.sdk.trace import TracerProvider, Span
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 
-OTEL_PYTHON_DJANGO_INSTRUMENT = os.getenv('OTEL_PYTHON_DJANGO_INSTRUMENT', 'True').lower() == 'true'  # 源码里有 environ.get(OTEL_PYTHON_DJANGO_INSTRUMENT) == "False"
+# https://opentelemetry-python-contrib.readthedocs.io/en/latest/instrumentation/django/django.html
+# https://opentelemetry-python.readthedocs.io/en/latest/examples/django/README.html
+
+
+os.environ.setdefault('OTEL_PYTHON_DJANGO_EXCLUDED_URLS', '/swagger/,healthcheck')  # DjangoInstrumentor 会根据这个设置排除不追踪的 url
+
+from opentelemetry.instrumentation.django import DjangoInstrumentor
+
+OTEL_PYTHON_DJANGO_INSTRUMENT = os.getenv('OTEL_PYTHON_DJANGO_INSTRUMENT', 'False') == 'True'  # 源码里有 environ.get(OTEL_PYTHON_DJANGO_INSTRUMENT) == "False"
 
 
 def init_tracer():
     trace.set_tracer_provider(
         TracerProvider(
-            resource=Resource.create({SERVICE_NAME: "my-helloworld-service"})
+            resource=Resource.create({SERVICE_NAME: 'django-server'})
         )
     )
-    tracer = trace.get_tracer(__name__)
+    # tracer = trace.get_tracer(__name__)
 
     # create a JaegerExporter
     jaeger_exporter = JaegerExporter(
@@ -42,17 +51,21 @@ def init_tracer():
 if OTEL_PYTHON_DJANGO_INSTRUMENT:
     init_tracer()
 
+    activation_key = 'opentelemetry-instrumentor-django.activation_key'
 
-    # https://opentelemetry-python-contrib.readthedocs.io/en/latest/instrumentation/django/django.html
-    def request_hook(span, request):
+
+    def request_hook(span: Span, request):
         # https://github.com/open-telemetry/opentelemetry-python-contrib/issues/288
-        activation_key = "opentelemetry-instrumentor-django.activation_key"
         if activation_key in request.META:
-            request.META[activation_key].__name__ = ""
+            request.META[activation_key].__name__ = ''
 
 
-    def response_hook(span, request, response):
-        pass
+    def response_hook(span: Span, request, response: typing.Union[HttpResponse, Response]):
+        response['trace-id'] = trace.format_trace_id(span.context.trace_id)
 
 
-    DjangoInstrumentor().instrument(request_hook=request_hook, response_hook=response_hook)
+    DjangoInstrumentor().instrument(
+        # is_sql_commentor_enabled=True,
+        request_hook=request_hook,
+        response_hook=response_hook,
+    )

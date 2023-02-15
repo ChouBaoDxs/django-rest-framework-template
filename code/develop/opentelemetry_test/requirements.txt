@@ -1,0 +1,6 @@
+fastapi
+opentelemetry-instrumentation-aiohttp-client
+opentelemetry-instrumentation-fastapi
+opentelemetry-instrumentation-grpc
+opentelemetry-instrumentation-requests
+uvicorn

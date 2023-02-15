@@ -1,5 +1,6 @@
 import datetime
 import os
+import sys
 
 XADMIN_URL = os.getenv('XADMIN_URL', 'wZNN02Mgq0I0qQPCwQviuDvyh8Nr9lpO')
 
@@ -54,7 +55,20 @@ DATABASE_APPS_MAPPING = {
 # cors
 CORS_ORIGIN_ALLOW_ALL = True
 
-GRPC_FRAMEWORK = {
-    'ROOT_HANDLERS_HOOK': 'django_socio_grpc_quickstart.apis.handlers.grpc_handlers',
-    'GRPC_CHANNEL_PORT': 50051,
-}
+IS_GRPC_SERVER = 'grpcrunserver' in ''.join(sys.argv)
+
+if IS_GRPC_SERVER:
+    GRPC_FRAMEWORK = {
+        'ROOT_HANDLERS_HOOK': 'django_socio_grpc_quickstart.apis.handlers.grpc_handlers',
+        'GRPC_CHANNEL_PORT': 50051,
+        'SERVER_INTERCEPTORS': [],
+    }
+
+    from .opentelemetry import OTEL_PYTHON_DJANGO_INSTRUMENT
+
+    if OTEL_PYTHON_DJANGO_INSTRUMENT:
+        from opentelemetry.instrumentation.grpc import GrpcInstrumentorServer, server_interceptor
+
+        GrpcInstrumentorServer().instrument()
+
+        # 或者 GRPC_FRAMEWORK['SERVER_INTERCEPTORS'] = [server_interceptor()]

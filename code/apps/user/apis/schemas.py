@@ -23,6 +23,15 @@ class UserSchema(BaseSchema):
     def fake_success(cls):
         return cls.schema(
             operation_id='user-模拟成功响应',
+            manual_parameters=[
+                openapi.Parameter(
+                    'traceparent',
+                    openapi.IN_HEADER,
+                    default='00-138286cb34e04a0811a8aa6965ea410f-93c98b42962922e1-01',
+                    required=False,
+                    type=openapi.TYPE_STRING,
+                ),
+            ],
         )
 
     @classmethod
