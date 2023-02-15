@@ -86,12 +86,13 @@ def client_response_hook(span: Span, message: dict):
 
 @app.middleware('http')
 async def add_trace_id_header(request: fastapi.Request, call_next):
+    response = await call_next(request)
     # trace_id = trace.get_current_span().get_span_context().trace_id
     span: Span = trace.get_current_span()
-    trace_id = span.context.trace_id
-    # trace_id = span.get_span_context().trace_id
-    response = await call_next(request)
-    response.headers['trace-id'] = trace.format_trace_id(trace_id)
+    if span.is_recording():
+        trace_id = span.context.trace_id
+        # trace_id = span.get_span_context().trace_id
+        response.headers['trace-id'] = trace.format_trace_id(trace_id)
     return response
 
 
