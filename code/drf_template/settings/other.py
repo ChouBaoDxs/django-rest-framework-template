@@ -2,6 +2,8 @@ import datetime
 import os
 import sys
 
+from contrib.grpc.interceptors import TraceRequestDataInterceptor
+
 XADMIN_URL = os.getenv('XADMIN_URL', 'wZNN02Mgq0I0qQPCwQviuDvyh8Nr9lpO')
 
 OPEN_SWAGGER = os.getenv('OPEN_SWAGGER', 'False').lower() == 'true'
@@ -61,7 +63,7 @@ if IS_GRPC_SERVER:
     GRPC_FRAMEWORK = {
         'ROOT_HANDLERS_HOOK': 'django_socio_grpc_quickstart.apis.handlers.grpc_handlers',
         'GRPC_CHANNEL_PORT': 50051,
-        'SERVER_INTERCEPTORS': [],
+        'SERVER_INTERCEPTORS': [TraceRequestDataInterceptor()],
     }
 
     from .opentelemetry import OTEL_PYTHON_DJANGO_INSTRUMENT
