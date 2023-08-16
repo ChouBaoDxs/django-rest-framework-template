@@ -52,6 +52,7 @@ DATABASE_APPS_MAPPING = {
 
     'user': 'default',
     'django_socio_grpc_quickstart': 'default',
+    'generate_crud_code_example': 'default',
 }
 
 # cors

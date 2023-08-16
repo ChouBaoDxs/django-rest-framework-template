@@ -13,16 +13,17 @@ else:
     Router = SimpleRouter
 
 # base
-defalt_router = Router()
+default_router = Router()
 
 # user app
 user_router = Router()
 user_router.register('', UserViewSet, basename='user')
 user_router.register('user_profile', UserProfileViewSet, basename='user_profile')
 
-app_name = "apis"
-urlpatterns: list = defalt_router.urls + [
-    path(r"user/", include(user_router.urls)),
+app_name = 'apis'
+urlpatterns: list = default_router.urls + [
+    path(r'user/', include(user_router.urls)),
+    path(r'generate-crud-code-example/', include('generate_crud_code_example.urls')),
 ]
 
 if settings.DEBUG:

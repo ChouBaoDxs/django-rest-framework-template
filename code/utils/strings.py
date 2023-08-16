@@ -27,3 +27,14 @@ def str2decimal(s) -> Decimal:
 
 def underline_2_hump(s: str):
     return re.sub(camelize_re, underscore_to_camel, s)
+
+
+def hump2underline(hunp_str):
+    p = re.compile(r'([a-z]|\d)([A-Z])')
+    sub = re.sub(p, r'\1_\2', hunp_str).lower()
+    return sub
+
+
+def underline2hump(underline_str):
+    sub = re.sub(r'(_\w)', lambda x: x.group(1)[1].upper(), underline_str)
+    return sub

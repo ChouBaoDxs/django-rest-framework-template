@@ -55,6 +55,7 @@ INSTALLED_APPS = [
 
     'user',
     'django_socio_grpc_quickstart',
+    'generate_crud_code_example',
 ]
 
 MIDDLEWARE = [

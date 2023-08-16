@@ -1,14 +1,13 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from django.db import models
 
-from utils.base_class import GenericModel
+from contrib.db.models import GenericModel
 
 
 class UserProfile(GenericModel):
-    user = models.OneToOneField(User, on_delete=models.PROTECT, db_constraint=False, null=True, editable=False)
-    phone = models.CharField('phone', max_length=32, null=True, unique=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.PROTECT, db_constraint=False, editable=False, null=True)
+    phone = models.CharField('phone', max_length=32, null=True, unique=True)
     desc = models.TextField('desc', default='', blank=True)
 
     class Meta:
-        verbose_name = 'UserProfile'
-        verbose_name_plural = verbose_name
+        verbose_name = verbose_name_plural = '用户信息'

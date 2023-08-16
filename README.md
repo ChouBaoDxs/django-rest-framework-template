@@ -3,6 +3,7 @@
 
 - [django-rest-framework-template](#django-rest-framework-template)
   - [开发相关](#开发相关)
+    - [增删改查模板代码生成](#增删改查模板代码生成)
     - [常用基础 Model](#常用基础-model)
     - [只返回查询结果的 id 集合](#只返回查询结果的-id-集合)
     - [字符串转 datetime](#字符串转-datetime)
@@ -28,6 +29,40 @@
 感谢 github TOC 生成器：https://ecotrust-canada.github.io/markdown-toc/
 
 ## 开发相关
+### 增删改查模板代码生成
+- 脚本位置：`code/scripts/generate_crud_code.py`
+- 脚本的 run 方法：
+  ```python
+  def run(*args):
+      if len(args) > 0:
+          model_path = args[0]
+      else:
+          model_path = 'generate_crud_code_example.models.Book'
+  
+      code_generator = CrudCodeGenerator(model_path)
+      # 生成代码到临时目录
+      # code_generator.generate_to_temp_dir()
+  
+      # 生成代码到指定目录
+      code_generator.generate_to_target_apis_dir(
+          os.path.join(project_root_dir, 'apps/generate_crud_code_example/apis'),
+          'apps.generate_crud_code_example.apis',
+          is_regenerate=True,
+      )
+  ```
+- 执行完上述脚本后，会在`code/apps/generate_crud_code_example`目录下生成 api 模板代码，根据业务场景再针对性修改即可：
+  ```
+  .
+  ├── filters
+  │     └── book.py
+  ├── schemas
+  │     └── book.py
+  ├── serializers
+  │     └── book.py
+  └── views
+        └── book.py
+  ```
+
 ### 常用基础 Model
 - 代码位置：`code/utils/base_class.py`
 - 比如附带逻辑删除以及创建时间、修改时间的 model：
