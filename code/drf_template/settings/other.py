@@ -49,6 +49,7 @@ DATABASE_APPS_MAPPING = {
 
     'user': 'default',
     'django_socio_grpc_quickstart': 'default',
+    'test_demo': 'default',
 }
 
 # cors
